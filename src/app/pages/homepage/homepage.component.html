@@ -1,8 +1,18 @@
 <div class="container mt-5">
     <ul *ngIf="todoList.length > 0">
       <li *ngFor="let item of todoList">
-        {{ item }} <button class="btn btn-danger">X</button>
+        {{ item.title }} 
       </li>
     </ul>
-    <p *ngIf="todoList.length <= 0">Listede hiç bir eleman yok.</p>
+    <div>
+    
+      <div *ngIf="todoList.length <= 0" class="spinner-grow text-success" role="status">
+        <span class="visually-hidden">Loading...</span>
+      
+      </div>
+    
+    
   </div>
+   
+  </div>
+ 
