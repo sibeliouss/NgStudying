@@ -4,11 +4,12 @@ import { Component, OnInit } from '@angular/core';
 import { ToDo } from '../../models/ToDo';
 import { FilterTodolistPipe } from '../../pipes/filter-todolist.pipe';
 import { FormsModule } from '@angular/forms';
+import { TodoService } from '../../services/todo.service';
 
 @Component({
   
   standalone: true,
-  imports: [CommonModule, HttpClientModule,FormsModule,FilterTodolistPipe],
+  imports: [CommonModule,FormsModule,FilterTodolistPipe],
   templateUrl: './homepage.component.html',
   styleUrl: './homepage.component.scss'
 })
@@ -20,8 +21,9 @@ export class HomepageComponent  {
   
 
   searchKey:string='';
+  constructor(private todoService: TodoService){}
 
-  constructor(private httpClient: HttpClient){}
+ // constructor(private httpClient: HttpClient){}
   ngOnInit():void{
 this.getTodos();
   }
@@ -44,8 +46,8 @@ this.getTodos();
   // }, 4000);
   // console.log('Sync');
 
-  this.httpClient
-  .get<ToDo[]>('https://jsonplaceholder.typicode.com/todos')
+  this.todoService
+  .getAll()
   .subscribe({
     next:(response: ToDo[])=>{
       console.log('Backendten cvp geldi.',response);
@@ -75,7 +77,8 @@ this.getTodos();
   //   });
   // }
   postToDo(){let obj={};
-this.httpClient.post('link',obj).subscribe();}
+//this..post('link',obj).subscribe();
+}
 
 dateFormat(){
  return this.am_pm.toLocaleString();
